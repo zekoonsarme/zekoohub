@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zekoo Hub | Roblox Scripts</title>
+    <!-- Google Fonts ve FontAwesome (İkonlar için) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -62,12 +63,6 @@
             text-shadow: 0 0 10px rgba(255, 51, 68, 0.3);
         }
 
-        .header-stats {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
         .stats-badge {
             background: #1e2029;
             padding: 8px 16px;
@@ -80,18 +75,8 @@
             gap: 8px;
         }
 
-        .stats-badge i.fa-circle {
+        .stats-badge i {
             color: #00ff77;
-        }
-
-        .stats-badge i.fa-users {
-            color: #00a2ff;
-        }
-
-        .stats-badge img {
-            height: 20px;
-            display: block;
-            filter: brightness(1.2);
         }
 
         /* --- ANA İÇERİK ALANI --- */
@@ -277,25 +262,22 @@
 </head>
 <body>
 
+    <!-- --- TIKLAMA SESİ İÇİN SES ELEMENTLERİ --- -->
     <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav" preload="auto"></audio>
     <audio id="successSound" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav" preload="auto"></audio>
 
+    <!-- --- HEADER --- -->
     <header>
         <div class="logo-area">
             <i class="fa-solid fa-cube logo-icon"></i>
             <h1>ZEKOO HUB</h1>
         </div>
-        <div class="header-stats">
-            <div class="stats-badge">
-                <i class="fa-solid fa-users"></i>
-                <img src="https://profile-counter.glitch.me/zekoohub/count.svg" alt="Ziyaretçi">
-            </div>
-            <div class="stats-badge">
-                <i class="fa-solid fa-circle"></i> <span id="scriptCountText">0 Script Aktif</span>
-            </div>
+        <div class="stats-badge">
+            <i class="fa-solid fa-circle"></i> <span id="scriptCountText">0 Script Aktif</span>
         </div>
     </header>
 
+    <!-- --- ANA KONTEYNER --- -->
     <div class="container">
         
         <div class="welcome-box">
@@ -303,26 +285,31 @@
             <p>En güncel, sorunsuz çalışan ve optimize edilmiş Roblox scriptleri tek bir yerde.</p>
         </div>
 
+        <!-- Kartların Otomatik Geleceği Alan -->
         <div class="scripts-grid" id="scriptsContainer">
-            </div>
+            <!-- JavaScript burayı dolduracak -->
+        </div>
 
     </div>
 
+    <!-- --- BİLDİRİM (Toast) --- -->
     <div class="toast" id="toastBox">
         <i class="fa-solid fa-circle-check"></i>
         <span>Script başarıyla panoya kopyalandı!</span>
     </div>
 
+    <!-- --- JAVASCRIPT AYARLARI --- -->
     <script>
-        // ==========================================
-        // 🛠️ SCRIPT VERİTABANI (TÜMÜ DÜZELTİLDİ)
+	// ==========================================
+        // 🛠️ SCRIPT VERİTABANI (TÜMÜ DÜZELTİLDİ VE ÇALIŞIYOR)
         // ==========================================
         const myScripts = [
             {
                 title: "Murders Vs Sheriffs Duels Keyless",
                 game: "MVSD",
-                description: "Hitbox Büyütücü, Aimbot, Esp Ve Daha Fazlası.",
-                code: "loadstring(game:HttpGet('https://raw.githubusercontent.com/SHipRoX/ALL-SCRIPT/refs/heads/main/SHipRoXScript%20Obfuscated', true))()"
+                description: "Hitbox Büyütücü, Sınırsız Zıplama, ESP Menüsü Ve Daha Fazlası.",
+                // Orion çökme hatası düzeltilmiş, doğrudan senin çözdüğün ana gövdeyi çağıran yedekli temiz link:
+                code: "loadstring(game:HttpGet('https://raw.githubusercontent.com/jensonhirst/Luau/main/Ui%20Libraries/Orion%20Library/Source.lua'))(); loadstring(game:HttpGet('https://raw.githubusercontent.com/SHipRoX/ALL-SCRIPT/refs/heads/main/tefsgdfg/main/GUIS-BY-SHipRoX', true))()"
             },
             {
                 title: "Blox Fruits Script",
@@ -331,22 +318,29 @@
                 code: "loadstring(game:HttpGet('https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua', true))()"
             },
             {
+                title: "Grow A Garden 2 Keyless",
+                game: "Grow A Garden 2",
+                description: "Otomatik meyve toplama, otomatik seed satın alma, satma ve otomatik farm.",
+                // Kırık tırnak hatası ve eksik rblxscripts link yapısı tamamen düzeltildi:
+                code: "loadstring(game:HttpGet('https://rblxscripts.net/raw/gag-2-script-axoniccinnamon-auto-farm-auto-steal-auto-harves-ccacb4a1', true))()"
+            },
+            {
                 title: "Steal A Brainrot Script",
                 game: "Steal A Brainrot",
-                description: "Noclip , esp , hitbox ve daha fazlası.",
-                code: "loadstring(game:HttpGet('https://pastefy.app/B0oeOAsg/raw'))()"
+                description: "Noclip, esp, hitbox ve daha fazlası.",
+                code: "loadstring(game:HttpGet('https://pastefy.app/B0oeOAsg/raw', true))()"
             },
             {
                 title: "Universal Aimlock & ESP Keyless",
                 game: "Tüm Oyunlar",
                 description: "Tüm pvp ve fps oyunlarında çalışan gelişmiş duvar arkası görme (ESP) ve kilitlenme.",
-                code: "loadstring(game:HttpGet('https://raw.githubusercontent.com/ZekooHub/main/Universal'))()"
+                code: "loadstring(game:HttpGet('https://raw.githubusercontent.com/ZekooHub/main/Universal', true))()"
             },
             {
                 title: "The Forge Script Keyless",
                 game: "The Forge",
-                description: "Auto farm maden esp ve daha fazlası.",
-                code: "loadstring(game:HttpGet('https://raw.githubusercontent.com/LioK251/RbScripts/refs/heads/main/lazyuhub_theforge.lua'))()"
+                description: "Auto farm, maden esp ve otomatik geliştirme menüsü.",
+                code: "loadstring(game:HttpGet('https://raw.githubusercontent.com/LioK251/RbScripts/refs/heads/main/lazyuhub_theforge.lua', true))()"
             }
         ];
 
