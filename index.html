@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zekoo Hub | Roblox Scripts</title>
+    <!-- Google Fonts ve FontAwesome (İkonlar için) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- GENEL AYARLAR & TEMA (Roblox Dark Style) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: #111217;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, #1e2029 0%, #111217 100%);
+            min-height: 100vh;
+        }
+
+        /* --- BAŞLIK ALANI (Header) --- */
+        header {
+            background: rgba(25, 27, 36, 0.95);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #ff3344;
+            box-shadow: 0 5px 25px rgba(255, 51, 68, 0.15);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            color: #ff3344;
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        header h1 {
+            font-weight: 800;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #fff, #ff3344);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 51, 68, 0.3);
+        }
+
+        .stats-badge {
+            background: #1e2029;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #333645;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stats-badge i {
+            color: #00ff77;
+        }
+
+        /* --- ANA İÇERİK ALANI --- */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .welcome-box {
+            background: linear-gradient(135deg, #191b24 0%, #13141c 100%);
+            border: 1px solid #262936;
+            border-left: 5px solid #ff3344;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .welcome-box h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .welcome-box p {
+            color: #9ca3af;
+        }
+
+        /* --- SCRIPT KARTLARI (Grid) --- */
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .script-card {
+            background: #191b24;
+            border: 2px solid #262936;
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Hover Efekti */
+        .script-card:hover {
+            transform: translateY(-8px);
+            border-color: #ff3344;
+            box-shadow: 0 15px 30px rgba(255, 51, 68, 0.2);
+        }
+
+        .script-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff3344, #ff6677);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .game-badge {
+            background: #ff3344;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .script-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .script-desc {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            height: 45px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* --- BUTONLAR & SES EFEKTLERİ --- */
+        .btn-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Kopyala Butonu */
+        .btn-copy {
+            background: #22c55e;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
+        }
+
+        .btn-copy:hover {
+            background: #16a34a;
+            transform: scale(1.03);
+        }
+
+        .btn-copy:active {
+            transform: scale(0.95);
+        }
+
+        /* Bilgi / Detay Butonu */
+        .btn-info {
+            background: #262936;
+            color: #fff;
+            border: 1px solid #3f4459;
+        }
+
+        .btn-info:hover {
+            background: #333645;
+            color: #ff3344;
+            border-color: #ff3344;
+        }
+
+        /* --- BİLDİRİM POPUP (Toast Notification) --- */
+        .toast {
+            position: fixed;
+            bottom: -100px;
+            right: 20px;
+            background: #22c55e;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .toast.show {
+            bottom: 20px;
+        }
+
+        /* ANIMASYONLAR */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --- TIKLAMA SESİ İÇİN SES ELEMENTLERİ --- -->
+    <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav" preload="auto"></audio>
+    <audio id="successSound" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav" preload="auto"></audio>
+
+    <!-- --- HEADER --- -->
+    <header>
+        <div class="logo-area">
+            <i class="fa-solid fa-cube logo-icon"></i>
+            <h1>ZEKOO HUB</h1>
+        </div>
+        <div class="stats-badge">
+            <i class="fa-solid fa-circle"></i> <span id="scriptCountText">0 Script Aktif</span>
+        </div>
+    </header>
+
+    <!-- --- ANA KONTEYNER --- -->
+    <div class="container">
+        
+        <div class="welcome-box">
+            <h2>Zekoo Hub'a Hoş Geldiniz! 🚀</h2>
+            <p>En güncel, sorunsuz çalışan ve optimize edilmiş Roblox scriptleri tek bir yerde.</p>
+        </div>
+
+        <!-- Kartların Otomatik Geleceği Alan -->
+        <div class="scripts-grid" id="scriptsContainer">
+            <!-- JavaScript burayı dolduracak -->
+        </div>
+
+    </div>
+
+    <!-- --- BİLDİRİM (Toast) --- -->
+    <div class="toast" id="toastBox">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Script başarıyla panoya kopyalandı!</span>
+    </div>
+
+    <!-- --- JAVASCRIPT AYARLARI --- -->
+    <script>
+        // ==========================================
+        // 🛠️ SCRIPT VERİTABANI (TÜMÜ DÜZELTİLDİ)
+        // ==========================================
+        const myScripts = [
+            {
+                title: "Murders Vs Sheriffs Duels Keyless",
+                game: "MVSD",
+                description: "Hitbox Büyütücü, Aimbot, Esp Ve Daha Fazlası.",
+                code: "loadstring(game:HttpGet('https://raw.githubusercontent.com/SHipRoX/ALL-SCRIPT/refs/heads/main/SHipRoXScript%20Obfuscated', true))()"
+            },
+            {
+                title: "Blox Fruits Script",
+                game: "Blox Fruits",
+                description: "Otomatik level kasma, seri görev yapma ve otomatik materyal toplama scripti.",
+                code: "loadstring(game:HttpGet('https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua', true))()"
+            },
+            {
+                title: "Steal A Brainrot Script",
+                game: "Steal A Brainrot",
+                description: "Noclip , esp , hitbox ve daha fazlası.",
+                code: "loadstring(game:HttpGet('https://pastefy.app/B0oeOAsg/raw'))()"
+            },
+            {
+                title: "Universal Aimlock & ESP Keyless",
+                game: "Tüm Oyunlar",
+                description: "Tüm pvp ve fps oyunlarında çalışan gelişmiş duvar arkası görme (ESP) ve kilitlenme.",
+                code: "loadstring(game:HttpGet('https://raw.githubusercontent.com/ZekooHub/main/Universal'))()"
+            },
+            {
+                title: "The Forge Script Keyless",
+                game: "The Forge",
+                description: "Auto farm maden esp ve daha fazlası.",
+                code: "loadstring(game:HttpGet('https://raw.githubusercontent.com/LioK251/RbScripts/refs/heads/main/lazyuhub_theforge.lua'))()"
+            }
+        ];
+
+        // --- SES FONKSİYONLARI ---
+        const clickSound = document.getElementById('clickSound');
+        const successSound = document.getElementById('successSound');
+
+        clickSound.volume = 0.4;
+        successSound.volume = 0.5;
+
+        function playClick() {
+            clickSound.currentTime = 0;
+            clickSound.play().catch(e => console.log("Ses bekleniyor..."));
+        }
+
+        function playSuccess() {
+            successSound.currentTime = 0;
+            successSound.play().catch(e => console.log("Ses bekleniyor..."));
+        }
+
+        // --- SİTEYİ DOLDURMA MOTORU ---
+        const container = document.getElementById('scriptsContainer');
+        const countText = document.getElementById('scriptCountText');
+
+        countText.innerText = `${myScripts.length} Script Aktif`;
+
+        myScripts.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'script-card';
+            
+            card.innerHTML = `
+                <div class="card-header">
+                    <span class="game-badge">${item.game}</span>
+                    <i class="fa-brands fa-roblox" style="color: #555;"></i>
+                </div>
+                <div class="script-title">${item.title}</div>
+                <div class="script-desc">${item.description}</div>
+                <div class="btn-actions">
+                    <button class="btn btn-copy" onclick="copyScript(${index})">
+                        <i class="fa-solid fa-copy"></i> Kopyala
+                    </button>
+                    <button class="btn btn-info" onclick="showDetails(${index})">
+                        <i class="fa-solid fa-circle-info"></i> Detay
+                    </button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        // --- BUTON İŞLEVLERİ ---
+        function copyScript(index) {
+            playClick(); 
+            const textToCopy = myScripts[index].code;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                setTimeout(() => {
+                    playSuccess(); 
+                    showToast(); 
+                }, 50);
+            }).catch(err => {
+                alert("Kopyalama başarısız oldu!");
+            });
+        }
+
+        function showDetails(index) {
+            playClick();
+            const item = myScripts[index];
+            alert(`🔍 Zekoo Hub Bilgilendirme:\n\n"${item.title}" scripti ${item.game} oyunu için tamamen günceldir. Exploit programınız ile inject edebilirsiniz.`);
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toastBox');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
