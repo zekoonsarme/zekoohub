@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zekoo Hub | Roblox Scripts</title>
-    <!-- Google Fonts ve FontAwesome (İkonlar için) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -63,6 +62,12 @@
             text-shadow: 0 0 10px rgba(255, 51, 68, 0.3);
         }
 
+        .header-stats {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
         .stats-badge {
             background: #1e2029;
             padding: 8px 16px;
@@ -75,8 +80,18 @@
             gap: 8px;
         }
 
-        .stats-badge i {
+        .stats-badge i.fa-circle {
             color: #00ff77;
+        }
+
+        .stats-badge i.fa-users {
+            color: #00a2ff;
+        }
+
+        .stats-badge img {
+            height: 20px;
+            display: block;
+            filter: brightness(1.2);
         }
 
         /* --- ANA İÇERİK ALANI --- */
@@ -262,22 +277,25 @@
 </head>
 <body>
 
-    <!-- --- TIKLAMA SESİ İÇİN SES ELEMENTLERİ --- -->
     <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav" preload="auto"></audio>
     <audio id="successSound" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav" preload="auto"></audio>
 
-    <!-- --- HEADER --- -->
     <header>
         <div class="logo-area">
             <i class="fa-solid fa-cube logo-icon"></i>
             <h1>ZEKOO HUB</h1>
         </div>
-        <div class="stats-badge">
-            <i class="fa-solid fa-circle"></i> <span id="scriptCountText">0 Script Aktif</span>
+        <div class="header-stats">
+            <div class="stats-badge">
+                <i class="fa-solid fa-users"></i>
+                <img src="https://profile-counter.glitch.me/zekoohub/count.svg" alt="Ziyaretçi">
+            </div>
+            <div class="stats-badge">
+                <i class="fa-solid fa-circle"></i> <span id="scriptCountText">0 Script Aktif</span>
+            </div>
         </div>
     </header>
 
-    <!-- --- ANA KONTEYNER --- -->
     <div class="container">
         
         <div class="welcome-box">
@@ -285,20 +303,16 @@
             <p>En güncel, sorunsuz çalışan ve optimize edilmiş Roblox scriptleri tek bir yerde.</p>
         </div>
 
-        <!-- Kartların Otomatik Geleceği Alan -->
         <div class="scripts-grid" id="scriptsContainer">
-            <!-- JavaScript burayı dolduracak -->
-        </div>
+            </div>
 
     </div>
 
-    <!-- --- BİLDİRİM (Toast) --- -->
     <div class="toast" id="toastBox">
         <i class="fa-solid fa-circle-check"></i>
         <span>Script başarıyla panoya kopyalandı!</span>
     </div>
 
-    <!-- --- JAVASCRIPT AYARLARI --- -->
     <script>
         // ==========================================
         // 🛠️ SCRIPT VERİTABANI (TÜMÜ DÜZELTİLDİ)
